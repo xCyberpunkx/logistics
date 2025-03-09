@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demande de devis de déménagement</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f8f8f8;
+            margin: 0; /* Important : supprimer les marges par défaut du body */
+            display: flex;
+            flex-direction: column; /* Pour organiser la navbar et le contenu en colonne */
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #d9181e;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            color: #fff;
+            width: 100%; /* Important : la navbar occupe toute la largeur */
+            box-sizing: border-box; /* Important pour inclure le padding dans la largeur */
+        }
+        
+        /* ... (autres styles) ... */
+        
+        
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links li {
+            display: inline;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #f8f8f8;
+            font-weight: bold;
+        }
+        .auth-buttons button {
+            background-color: #fff;
+            color: #d9181e;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-left: 10px;
+        }
+        
+        .auth-buttons button:hover {
+            background-color: #f8f8f8;
+        }
+        
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Responsive Navbar */
+        @media (max-width: 760px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background-color: #d9181e;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                padding: 20px;
+                border-radius: 0 0 10px 10px;
+            }
+        
+            .nav-links.active {
+                display: flex;
+            }
+        
+            .burger {
+                display: block;
+            }
+        }
+        #formulaire {
+            width: 600px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px auto 21px; /* Marge haut, auto pour centrer horizontalement, 21 en bas */
+        }
+
+        h1 {
+            color: #d32f2f; /* Rouge */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+                input[type="tel"],
+        input[type="number"],
+        input[type="date"],
+        textarea,
+        select {
+            width: calc(100% - 12px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input[type="checkbox"]{
+            margin-right: 5px;
+        }
+
+        button {
+            background-color: #d32f2f; /* Rouge */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            /*width: 100%;*/
+        }
+
+        button:hover {
+            background-color: #b71c1c; /* Rouge plus foncé */
+        }
+
+        .hidden {
+            display: none;
+        }
+        /* Styles généraux */
+footer {
+    background-color: #f4f4f4;
+    padding: 20px 110px;
+    
+    font-family: 'Arial', sans-serif;
+    
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    position: relative;
+    left: 100px;
+    
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    
+}
+
+.footer-section h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.footer-section h3::after {
+    content: "";
+    width: 50%;
+    height: 2px;
+    background-color: #d9181e;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+
+/* Transition de lien */
+.footer-section a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    margin: 5px 0;
+    padding-left: 0;
+    transition: padding-left 0.3s ease, color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #d9181e;
+    padding-left: 10px; /* Ajout de l'effet de décalage */
+}
+
+.phone-number {
+    font-weight: bold;
+    color: #d9181e;
+    font-size: 20px;
+    transition: transform 0.5s ease-in;
+}
+
+.phone-number:hover {
+    transform:scaleY(1.2);
+}
+
+/* Bottom footer */
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer-section {
+        min-width: 100%;
+        text-align: center;
+    }
+    .footer-bottom {
+        margin-top: 20px;
+    }
+}
+
+ /* Bouton Go to Top */
+ #goToTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  background-color: #d9181e;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+#goToTopBtn:hover {
+  background-color: #a51416;
+  transform: scale(1.1);
+}
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">Déménagement</div>
+    <ul class="nav-links">
+        <li><a href="accueil.html">Accueil</a></li>
+        <li><a href="entreprise.html">Entreprise</a></li>
+        <li><a href="a propos.html">À propos</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="auth-buttons">
+        <button id="login-btn"><i class="fas fa-sign-in-alt"></i> Connexion</button>
+        <button id="profile-btn" style="display: none;"><i class="fas fa-user"></i> Profil</button>
+    </div>
+    <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+    </div>
+</nav>
+
+    <div id="formulaire">
+        <h1>Demande de devis de déménagement</h1>
+        <form id="demandeDevis" method="post" action=""> <!-- Ajout du formulaire et de l'action -->
+            <input type="hidden" name="csrf_token" value=""> <!--- Jetons CSRF (générés côté serveur)-->
+    
+            <div class="form-group">
+                <label for="typeDem">Type de déménagement :</label>
+                <select id="typeDem" name="typeDem" onchange="afficherChamps()"> 
+                    <option value="economique">Déménagement Économique</option>
+                    <option value="confort">Déménagement Confort</option>
+                    <option value="luxe">Déménagement Luxe</option>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" required> 
+            </div>
+    
+            <div class="form-group">
+                <label for="telephone">Téléphone :</label>
+                <input type="tel" id="telephone" name="telephone" required> 
+            </div>
+    
+            <div class="form-group">
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required> 
+            </div>
+    
+            <div class="form-group">
+                <label for="adresseDepart">Adresse de départ :</label>
+                <input type="text" id="adresseDepart" name="adresseDepart" required> 
+            </div>
+    
+            <div class="form-group">
+                <label for="adresseArrivee">Adresse d'arrivée :</label>
+                <input type="text" id="adresseArrivee" name="adresseArrivee" required> 
+            </div>
+    
+            <div class="form-group">
+                <label for="dateDem">Date du déménagement souhaitée :</label>
+                <input type="date" id="dateDem" name="dateDem" required> 
+            </div>
+    
+            <div class="form-group">
+                <label for="nbPieces">Nombre de pièces :</label>
+                <input type="number" id="nbPieces" name="nbPieces" required> 
+            </div>
+    
+            <div id="champsEconomique" class="hidden">
+                <div class="form-group">
+                    <label for="volumeEco">Volume estimé (m³) :</label>
+                    <input type="number" id="volumeEco" name="volumeEco"> 
+                </div>
+                <div class="form-group">
+                    <label for="besoinCartons">Besoin de cartons ?</label>
+                    <input type="checkbox" id="besoinCartons" name="besoinCartons"> 
+                </div>
+            </div>
+    
+            <div id="champsConfort" class="hidden">
+                <div class="form-group">
+                    <label for="volumeConf">Volume estimé (m³) :</label>
+                    <input type="number" id="volumeConf" name="volumeConf"> 
+                </div>
+                <div class="form-group">
+                    <label for="meublesComplexes">Meubles complexes ?</label>
+                    <input type="checkbox" id="meublesComplexes" name="meublesComplexes"> 
+                </div>
+            </div>
+    
+            <div id="champsLuxe" class="hidden">
+                <div class="form-group">
+                    <label for="besoinsSpecifiques">Besoins spécifiques :</label>
+                    <textarea id="besoinsSpecifiques" name="besoinsSpecifiques"></textarea> 
+                </div>
+                <div class="form-group">
+                    <label for="nettoyage">Nettoyage des lieux ?</label>
+                    <input type="checkbox" id="nettoyage" name="nettoyage"> 
+                </div>
+            </div>
+    
+            <center><button id="button" type="submit">Demander mon devis</button></center>
+        </form>
+    </div>
+    <!-- footer -->
+     <!-- Bouton Go to Top -->
+    <button id="goToTopBtn" title="Retour en haut">↑</button>
+
+    <!-- footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section contact">
+                <h3>CONTACT</h3>
+                <p>Pour nous joindre :</p>
+                <p class="phone-number">+213 (0) 541 768 051</p>
+                <p>Lun - Ven : 8h00 à 19h00</p>
+                <p>Sam : 9h00 à 17h00</p>
+                <div class="links">
+                    <a href="a propos.html">À propos</a>
+                    <a href="contact.html">Contactez-nous</a>
+                </div>
+            </div>
+            <div class="footer-section services">
+                <h3>SERVICES</h3>
+                <ul>
+                    <li><a href="#">Aide / FAQ</a></li>
+                    <li><a href="a propos.html">Mes guides déménagement</a></li>
+                    <li><a href="rntreprise.html">Devenir partenaire</a></li>
+                    <li><a href="contact.html">Demandez votre devis déménagement</a></li>
+                    <li><a href="#">Espace Déménageur</a></li>
+                </ul>
+            </div>
+            <div class="footer-section mentions">
+                <h3>MENTIONS</h3>
+                <p><a href="#">Données personnelles</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>EXPERTMOVE.dz - Un site du groupe EXPERTMOVE</p>
+        </div>
+    </footer>
+    
+    <script>
+        function afficherChamps() {
+            const typeDem = document.getElementById("typeDem").value;
+            const champs = {
+                economique: document.getElementById("champsEconomique"),
+                confort: document.getElementById("champsConfort"),
+                luxe: document.getElementById("champsLuxe")
+            };
+    
+            for (const key in champs) {
+                champs[key].classList.add("hidden");
+            }
+    
+            if (champs[typeDem]) {
+                champs[typeDem].classList.remove("hidden");
+            }
+        }
+    
+        const formulaire = document.getElementById('demandeDevis'); // Sélectionne le formulaire par son ID
+        formulaire.addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche la soumission par défaut
+            // Ici, vous ajouterez le code pour envoyer le formulaire via AJAX (recommandé) ou pour une soumission normale
+            alert("Formulaire soumis (simulation - à remplacer par l'envoi réel)"); // Message de test
+        });
+
+        //nav-bar et footer !!
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelector('.nav-links');
+        const loginBtn = document.getElementById('login-btn');
+        const profileBtn = document.getElementById('profile-btn');
+    
+        // Gestion du menu burger
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            burger.classList.toggle('toggle');
+        });
+    
+        // Simulation de connexion/déconnexion
+        let isLoggedIn = false;
+    
+        loginBtn.addEventListener('click', () => {
+            isLoggedIn = !isLoggedIn;
+            updateAuthButtons();
+        });
+    
+        function updateAuthButtons() {
+            if (isLoggedIn) {
+                loginBtn.style.display = 'none';
+                profileBtn.style.display = 'inline-block';
+            } else {
+                loginBtn.style.display = 'inline-block';
+                profileBtn.style.display = 'none';
+            }
+        } 
+        // buuton go to top
+        // Sélectionner le bouton
+        const goToTopBtn = document.getElementById('goToTopBtn');
+
+        // Afficher/Masquer le bouton en fonction du scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                goToTopBtn.style.display = 'block';
+            } else {
+                goToTopBtn.style.display = 'none';
+            }
+        });
+
+        // Remonter en haut de la page lorsqu'on clique sur le bouton
+        goToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Défilement fluide
+            });
+        });
+
+    </script>
+    
+    </body>
+    </html>
