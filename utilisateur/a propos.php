@@ -499,10 +499,10 @@
     <nav class="navbar">
         <div class="logo">Déménagement</div>
         <ul class="nav-links">
-            <li><a href="accueil.html">Accueil</a></li>
-            <li><a href="entreprise.html">Entreprise</a></li>
-            <li><a href="a propos.html">À propos</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="accueil.php">Accueil</a></li>
+            <li><a href="entreprise.php">Entreprise</a></li>
+            <li><a href="a propos.php">À propos</a></li>
+            <li><a href="contact.php">Contact</a></li>
         </ul>
         <div class="auth-buttons">
             <button id="login-btn"><i class="fas fa-sign-in-alt"></i> Connexion</button>

@@ -1,6 +1,6 @@
 <?php
 // reservation.php
-require_once 'config.php'; // Fichier de connexion PDO
+require('../config/config.php');
 
 $messageSuccess = '';
 $messageError = '';
@@ -8,46 +8,48 @@ $messageError = '';
 // Vérifier si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer et nettoyer les données
-    $name = trim($_POST['name']);
-    $email = trim($_POST['email']);
-    $phone = trim($_POST['phone']);
+    $name           = trim($_POST['name']);
+    $email          = trim($_POST['email']);
+    $phone          = trim($_POST['phone']);
     $currentAddress = trim($_POST['currentAddress']);
-    $newAddress = trim($_POST['newAddress']);
-    $tarif = trim($_POST['tarif']);
-    $date = trim($_POST['date']);
-    $time = trim($_POST['time']);
-    $businessMove = isset($_POST['businessMove']) ? 1 : 0;
-    $details = trim($_POST['details']);
-    $message = trim($_POST['message']);
+    $newAddress     = trim($_POST['newAddress']);
+    $tarif          = trim($_POST['tarif']);
+    $date           = trim($_POST['date']);
+    $time           = trim($_POST['time']);
+    $businessMove   = isset($_POST['businessMove']) ? 1 : 0;
+    $details        = trim($_POST['details']);
+    $message        = trim($_POST['message']);
+    $wilaya         = trim($_POST['wilaya']);
 
-    // Vérifier que tous les champs obligatoires sont remplis
-    if ($name && $email && $phone && $currentAddress && $newAddress && $tarif && $date && $time) {
-      try {
-          // Préparation de la requête d'insertion
-          $sql = "INSERT INTO reservation (name, email, phone, currentAddress, newAddress, tarif, `date`, `time`, businessMove, details, message)
-                  VALUES (:name, :email, :phone, :currentAddress, :newAddress, :tarif, :date, :time, :businessMove, :details, :message)";
+    // Vérifier que tous les champs obligatoires sont remplis (on ajoute $wilaya)
+    if ($name && $email && $phone && $currentAddress && $newAddress && $tarif && $date && $time && $wilaya) {
+        try {
+            // Préparation de la requête d'insertion (on ajoute la colonne wilaya)
+            $sql = "INSERT INTO reservation (name, email, phone, currentAddress, newAddress, tarif, `date`, `time`, businessMove, details, message, wilaya)
+                    VALUES (:name, :email, :phone, :currentAddress, :newAddress, :tarif, :date, :time, :businessMove, :details, :message, :wilaya)";
 
-          $stmt = $pdo->prepare($sql);
-          $stmt->execute([
-              ':name'           => $name,
-              ':email'          => $email,
-              ':phone'          => $phone,
-              ':currentAddress' => $currentAddress,
-              ':newAddress'     => $newAddress,
-              ':tarif'          => $tarif,
-              ':date'           => $date,
-              ':time'           => $time,
-              ':businessMove'   => $businessMove,
-              ':details'        => $details,
-              ':message'        => $message,
-          ]);
-          $messageSuccess = "Votre réservation a été envoyée avec succès !";
-      } catch (PDOException $e) {
-          $messageError = "Erreur lors de l'envoi de la réservation : " . $e->getMessage();
-      }
-  } else {
-      $messageError = "Veuillez remplir tous les champs obligatoires.";
-  }
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':name'           => $name,
+                ':email'          => $email,
+                ':phone'          => $phone,
+                ':currentAddress' => $currentAddress,
+                ':newAddress'     => $newAddress,
+                ':tarif'          => $tarif,
+                ':date'           => $date,
+                ':time'           => $time,
+                ':businessMove'   => $businessMove,
+                ':details'        => $details,
+                ':message'        => $message,
+                ':wilaya'         => $wilaya,
+            ]);
+            $messageSuccess = "Votre réservation a été envoyée avec succès !";
+        } catch (PDOException $e) {
+            $messageError = "Erreur lors de l'envoi de la réservation : " . $e->getMessage();
+        }
+    } else {
+        $messageError = "Veuillez remplir tous les champs obligatoires.";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -144,22 +146,81 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="email">Adresse Email</label>
         <input type="email" id="email" name="email" placeholder="Votre email" required>
       </div>
-      <!-- Champ remplacé par Numéro de téléphone -->
       <div class="form-group">
         <label for="phone">Numéro de téléphone</label>
         <input type="tel" id="phone" name="phone" placeholder="Votre numéro de téléphone" required>
       </div>
-      <!-- Votre logement actuel -->
+      <div class="form-group">
+        <label for="wilaya">Wilaya</label>
+        <select id="wilaya" name="wilaya" required>
+          <option value="">Sélectionnez votre wilaya</option>
+          <option value="adrar">1 - Adrar</option>
+    <option value="Chlef">2 - Chlef</option>
+    <option value="Laghouat">3 - Laghouat</option>
+    <option value=" Oum El Bouaghi">4 - Oum El Bouaghi</option>
+    <option value="Batna">5 - Batna</option>
+    <option value="Béjaïa">6 - Béjaïa</option>
+    <option value="Biskra">7 - Biskra</option>
+    <option value="Béchar">8 - Béchar</option>
+    <option value="Blida">9 - Blida</option>
+    <option value="Bouira">10 - Bouira</option>
+    <option value="Tamanrasset">11 - Tamanrasset</option>
+    <option value="Tébessa">12 - Tébessa</option>
+    <option value="Tlemcen">13 - Tlemcen</option>
+    <option value="Tiaret">14 - Tiaret</option>
+    <option value="Tizi Ouzou">15 - Tizi Ouzou</option>
+    <option value="Alger">16 - Alger</option>
+    <option value="djelfa">17 - Djelfa</option>
+    <option value="Jijel">18 - Jijel</option>
+    <option value="Sétif">19 - Sétif</option>
+    <option value="Saïda">20 - Saïda</option>
+    <option value="Skikda">21 - Skikda</option>
+    <option value="Sidi Bel Abbès">22 - Sidi Bel Abbès</option>
+    <option value="Annaba">23 - Annaba</option>
+    <option value="Guelma">24 - Guelma</option>
+    <option value="Constantine">25 - Constantine</option>
+    <option value="Médéa">26 - Médéa</option>
+    <option value="Mostaganem">27 - Mostaganem</option>
+    <option value="M'Sila">28 - M'Sila</option>
+    <option value="Mascara">29 - Mascara</option>
+    <option value="Ouargla">30 - Ouargla</option>
+    <option value="Oran">31 - Oran</option>
+    <option value="El Bayadh">32 - El Bayadh</option>
+    <option value="Illizi">33 - Illizi</option>
+    <option value="Bordj Bou Arreridj">34 - Bordj Bou Arreridj</option>
+    <option value="Boumerdès">35 - Boumerdès</option>
+    <option value="El Tarf">36 - El Tarf</option>
+    <option value="Tindouf">37 - Tindouf</option>
+    <option value="Tissemsilt">38 - Tissemsilt</option>
+    <option value="El Oued">39 - El Oued</option>
+    <option value="Khenchela">40 - Khenchela</option>
+    <option value="Souk Ahras">41 - Souk Ahras</option>
+    <option value="Tipaza">42 - Tipaza</option>
+    <option value="Mila">43 - Mila</option>
+    <option value="Aïn Defla">44 - Aïn Defla</option>
+    <option value="Naâma">45 - Naâma</option>
+    <option value="Aïn Témouchent">46 - Aïn Témouchent</option>
+    <option value="Ghardaïa">47 - Ghardaïa</option>
+    <option value="Relizane">48 - Relizane</option>
+    <option value="Timimoun">49 - Timimoun</option>
+    <option value="Bordj Baji Mokhtar">50 - Bordj Baji Mokhtar</option>
+    <option value="Ouled Djellal">51 - Ouled Djellal</option>
+    <option value="Touggourt">52 - Touggourt</option>
+    <option value="Djanet">53 - Djanet</option>
+    <option value="In Salah">54 - In Salah</option>
+    <option value="In Guezzam">55 - In Guezzam</option>
+    <option value="El M'Ghair">56 - El M'Ghair</option>
+    <option value="El Meniaa">57 - El Meniaa </option>
+    <option value="Autre">58 - Autre</option>
+    </select><br>
       <div class="form-group">
         <label for="currentAddress">Votre logement actuel</label>
         <input type="text" id="currentAddress" name="currentAddress" placeholder="Adresse de votre logement actuel" required>
       </div>
-      <!-- Votre nouveau logement -->
       <div class="form-group">
         <label for="newAddress">Votre nouveau logement</label>
         <input type="text" id="newAddress" name="newAddress" placeholder="Adresse de votre nouveau logement" required>
       </div>
-      <!-- Tarifs compétitifs -->
       <div class="form-group">
         <label for="tarif">Tarifs compétitifs</label>
         <select id="tarif" name="tarif" required>
@@ -169,6 +230,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <option value="lux">Lux</option>
         </select>
       </div>
+        
+      </div>
       <div class="form-group">
         <label for="date">Date de réservation</label>
         <input type="date" id="date" name="date" required>
@@ -177,19 +240,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="time">Heure de réservation</label>
         <input type="time" id="time" name="time" required>
       </div>
-      <!-- Case à cocher pour déménagement d'entreprise ou d'association -->
       <div class="form-group">
         <label>
           <input type="checkbox" id="businessMove" name="businessMove">
           Déménagement d'entreprise ou d'association
         </label>
       </div>
-      <!-- Nouveau champ pour les précisions sur le déménagement -->
       <div class="form-group">
         <label for="details">Précisions sur votre déménagement</label>
-        <textarea id="details" name="details" placeholder="Précisions à apporter sur votre déménagement : volume (en m3), étage, difficulté d'accès, espace de stockage, piano, monte meuble..." rows="4"></textarea>
+        <textarea id="details" name="details" placeholder="Précisions sur le déménagement..." rows="4"></textarea>
       </div>
-      <!-- Message optionnel -->
       <div class="form-group">
         <label for="message">Message (optionnel)</label>
         <textarea id="message" name="message" placeholder="Votre message" rows="4"></textarea>

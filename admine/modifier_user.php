@@ -1,6 +1,6 @@
 <?php
 // Inclure la connexion à la base de données
-include('config.php');
+require('../config/config.php');
 
 // Vérifier si l'ID et le type sont passés en paramètre
 if (!isset($_GET['id']) || empty($_GET['id']) || !isset($_GET['type']) || empty($_GET['type'])) {

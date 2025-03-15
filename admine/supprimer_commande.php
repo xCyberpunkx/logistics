@@ -3,7 +3,7 @@
 
 <?php
 // Inclure la connexion
-include('config.php');
+require('../config/config.php');
 
 // Vérifier si les paramètres existent
 if (!isset($_GET['id']) || empty($_GET['id']) || !isset($_GET['type']) || empty($_GET['type'])) {

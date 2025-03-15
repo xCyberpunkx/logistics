@@ -21,15 +21,15 @@
           <li class="mb-4"><a href="chauffeurs.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">local_shipping</span><span class="ml-2">Chauffeurs</span></a></li>
           <li class="mb-4"><a href="messagerie.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">chat</span><span class="ml-2">Messagerie</span></a></li>
           <li class="mb-4"><a href="commentaire.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">comment</span><span class="ml-2">Commentaires</span></a></li>
-          <li class="mb-4"><a href="offre.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">local_offer</span><span class="ml-2">Offres</span></a></li>
-          <li class="mb-4"><a href="user.html" class="flex items-center p-2 bg-gray-200 dark:bg-gray-700 rounded-md"><span class="material-icons">person</span><span class="ml-2">Utilisateurs</span></a></li>
-          <li class="mb-4"><a href="parametre.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">settings</span><span class="ml-2">Paramètres</span></a></li>
+          <li class="mb-4"><a href="offre (1).php" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">local_offer</span><span class="ml-2">Offres</span></a></li>
+          <li class="mb-4"><a href="user.php" class="flex items-center p-2 bg-gray-200 dark:bg-gray-700 rounded-md"><span class="material-icons">person</span><span class="ml-2">Utilisateurs</span></a></li>
+          <li class="mb-4"><a href="parametre (1).html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">settings</span><span class="ml-2">Paramètres</span></a></li>
         </ul>
       </nav>
     </aside>
 
 <?php
-include 'config.php'; 
+require('../config/config.php');
 
 // Requête pour récupérer tous les utilisateurs, chauffeurs et entreprises
 $sql = "SELECT 'utilisateur' AS type,id, nom, email FROM utilisateur 

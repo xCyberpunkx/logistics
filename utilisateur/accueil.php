@@ -19,8 +19,7 @@
             box-sizing: border-box;
             background-color: #f8f8f8;
         }
-
-        h1, p {
+ h1, p {
             margin: 0;
             padding: 0;
         }
@@ -370,6 +369,17 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
     /* Bouton */
     .btnn {
       display: inline-block;
@@ -601,27 +611,136 @@ footer {
   background-color: #a51416;
   transform: scale(1.1);
 }
+
+
+
+.profile-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Image de profil */
+.profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+/* Menu déroulant */
+.dropdown-menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    display: none;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    min-width: 180px;
+    padding: 10px 0;
+}
+
+/* Affichage du menu si actif */
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Style des liens */
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: #f0f0f0;
+}
+
+
+
+
     </style>
 </head>
 <body>
     <!-- Barre de navigation -->
 <nav class="navbar">
-    <div class="logo"><img src="logoexp.png" alt=""></div>
+    <div class="logo"><img src="" alt=""></div>
     <ul class="nav-links">
-        <li><a href="accueil.html">Accueil</a></li>
-        <li><a href="entreprise.html">Entreprise</a></li>
-        <li><a href="a propos.html">À propos</a></li>
+        <li><a href="accueil.php">Accueil</a></li>
+        <li><a href="entreprise.php">Entreprise</a></li>
+        <li><a href="a propos.php">À propos</a></li>
         <li><a href="#">Contact</a></li>
     </ul>
-    <div class="auth-buttons">
-        <button id="login-btn"><i class="fas fa-sign-in-alt"></i> Connexion</button>
-        <button id="profile-btn" style="display: none;"><i class="fas fa-user"></i> Profil</button>
+
+<body>
+
+<div class="profile-container" onclick="toggleMenu()">
+        
+        <img id="profile-img" src="default.png" class="profile-img" alt="Profil">
+        
+        <div id="dropdown-menu" class="dropdown-menu">
+            <a href="#">Paramètres</a>
+            <a href="logout.php">Se déconnecter</a>
+        </div>
     </div>
-    <div class="burger">
-        <div class="line1"></div>
-        <div class="line2"></div>
-        <div class="line3"></div>
-    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const profileImg = document.getElementById("profile-img");
+            const dropdownMenu = document.getElementById("dropdown-menu");
+            const logoutBtn = document.getElementById("logout");
+
+            // Vérifier si l'utilisateur est connecté
+            let isConnected = sessionStorage.getItem("connected");
+
+            if (isConnected) {
+                profileImg.src = "user-avatar.png"; // Image après connexion
+                profileImg.style.border = "2px solid green"; // Bordure verte pour montrer la connexion
+            } else {
+                profileImg.onclick = function () {
+                    window.location.href = "LOGIN1_R.php"; // Redirige vers la connexion
+                };
+            }
+
+            // Gérer l'affichage du menu déroulant
+            profileImg.addEventListener("click", function (event) {
+                if (isConnected) {
+                    dropdownMenu.classList.toggle("show");
+                }
+                event.stopPropagation(); // Empêche la fermeture immédiate
+            });
+
+            // Cacher le menu si on clique ailleurs
+            document.addEventListener("click", function (event) {
+                if (!profileImg.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.classList.remove("show");
+                }
+            });
+
+            // Déconnexion
+            logoutBtn.addEventListener("click", function () {
+                sessionStorage.removeItem("connected"); // Supprime la session
+                window.location.reload(); // Recharge la page
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </nav>
 <br><br>
     <!-- Slider Section -->
@@ -710,24 +829,10 @@ footer {
             </div>
         </div>
     </section>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
+ 
 
     <?php
-include 'config.php'; // Connexion à la base de données
+ include('../config/config.php'); // Connexion à la base de données
 
 // Récupérer les offres
 $sql = "SELECT * FROM offres";
@@ -840,32 +945,14 @@ $offres = $stmt->fetchAll(PDO::FETCH_ASSOC);
     const loginBtn = document.getElementById('login-btn');
     const profileBtn = document.getElementById('profile-btn');
 
-    // Gestion du menu burger
     burger.addEventListener('click', () => {
         navLinks.classList.toggle('active');
         burger.classList.toggle('toggle');
     });
 
-    // Simulation de connexion/déconnexion
-    let isLoggedIn = false;
+ 
 
-    loginBtn.addEventListener('click', () => {
-        isLoggedIn = !isLoggedIn;
-        updateAuthButtons();
-    });
-
-    function updateAuthButtons() {
-        if (isLoggedIn) {
-            loginBtn.style.display = 'none';
-            profileBtn.style.display = 'inline-block';
-        } else {
-            loginBtn.style.display = 'inline-block';
-            profileBtn.style.display = 'none';
-        }
-    }
-
-    // Initialiser les boutons
-    updateAuthButtons();
+    
 
 
         const slides = document.querySelectorAll('.slide');
@@ -951,6 +1038,49 @@ $offres = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 behavior: 'smooth' // Défilement fluide
             });
         });
+        
+
+
+
+
+
+
+
+
+let isConnected = false; // Passe à true quand l'utilisateur est connecté
+
+const userBubble = document.getElementById('userBubble');
+const userMenu = document.getElementById('userMenu');
+
+// Fonction de redirection vers la page de connexion
+function redirectToLogin() {
+    console.log("Redirection vers LOGIN1_R.php");
+    window.location.href = 'LOGIN1_R.php';
+}
+
+// Gère le clic sur la boule
+userBubble.addEventListener('click', function(e) {
+  // Si l'utilisateur n'est pas connecté, redirige vers la page de connexion
+  if (!isConnected) {
+    redirectToLogin();
+  } else {
+    // Si connecté, affiche ou cache le menu déroulant
+    if (userMenu.style.display === 'block') {
+      userMenu.style.display = 'none';
+    } else {
+      userMenu.style.display = 'block';
+    }
+  }
+});
+
+// Pour masquer le menu si on clique en dehors
+document.addEventListener('click', function(e) {
+  if (!userBubble.contains(e.target)) {
+    userMenu.style.display = 'none';
+  }
+});
+
+        
     </script>
 </body>
 </html>

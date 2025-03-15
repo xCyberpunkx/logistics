@@ -1,10 +1,9 @@
-<?php
-// offres.php
-require 'config.php'; // Fichier de connexion PDO
+<?php 
+require('../config/config.php');
 
 try {
     // Récupération des offres depuis la table "offre", incluant le champ "contenu"
-    $stmt = $pdo->query("SELECT id, titre, description, prix, contenu FROM offres");
+    $stmt = $pdo->query("SELECT id, nom, description, prix, contenu FROM offres");
     $offres = $stmt->fetchAll();
 } catch (PDOException $e) {
     die("Erreur: " . $e->getMessage());
@@ -27,42 +26,17 @@ try {
       <h2 class="text-2xl font-bold mb-6">Déménagement Pro</h2>
       <nav>
         <ul>
-          <li class="mb-4"><a href="dashboard.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
-            <span class="material-icons">dashboard</span>
-            <span class="ml-2">Tableau de bord</span>
-          </a></li>
-          <li class="mb-4"><a href="commandes.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
-            <span class="material-icons">assignment</span>
-            <span class="ml-2">Commandes</span>
-          </a></li>
-          <li class="mb-4"><a href="entreprisee.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
-            <span class="material-icons">business</span>
-            <span class="ml-2">Entreprise</span>
-          </a></li>
-          <li class="mb-4"><a href="chauffeurs.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
-            <span class="material-icons">local_shipping</span>
-            <span class="ml-2">Chauffeurs</span>
-          </a></li>
-          <li class="mb-4"><a href="messagerie.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
-            <span class="material-icons">chat</span>
-            <span class="ml-2">Messagerie</span>
-          </a></li>
-          <li class="mb-4"><a href="commentaire.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
-            <span class="material-icons">comment</span>
-            <span class="ml-2">Commentaires</span>
-          </a></li>
-          <li class="mb-4"><a href="offres.php" class="flex items-center p-2 bg-gray-200 dark:bg-gray-700 rounded-md">
-            <span class="material-icons">local_offer</span>
-            <span class="ml-2">Offres</span>
-          </a></li>
-          <li class="mb-4"><a href="user.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
-            <span class="material-icons">person</span>
-            <span class="ml-2">Utilisateurs</span>
-          </a></li>
-          <li class="mb-4"><a href="parametre.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
-            <span class="material-icons">settings</span>
-            <span class="ml-2">Paramètres</span>
-          </a></li>
+        <ul>
+          <li class="mb-4"><a href="dashboard (2).php" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">dashboard</span><span class="ml-2">Tableau de bord</span></a></li>
+          <li class="mb-4"><a href="commandes.php" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">assignment</span><span class="ml-2">Commandes</span></a></li>
+          <li class="mb-4"><a href="entreprisee.php" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">business</span><span class="ml-2">Entreprise</span></a></li>
+          <li class="mb-4"><a href="chauffeurs.php" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">local_shipping</span><span class="ml-2">Chauffeurs</span></a></li>
+          <li class="mb-4"><a href="messagerie.php" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">chat</span><span class="ml-2">Messagerie</span></a></li>
+          <li class="mb-4"><a href="commentaire (1).php" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">comment</span><span class="ml-2">Commentaires</span></a></li>
+          <li class="mb-4"><a href="offre (1).php" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">local_offer</span><span class="ml-2">Offres</span></a></li>
+          <li class="mb-4"><a href="user.php" class="flex items-center p-2 bg-gray-200 dark:bg-gray-700 rounded-md"><span class="material-icons">person</span><span class="ml-2">Utilisateurs</span></a></li>
+          <li class="mb-4"><a href="parametre (1).php" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"><span class="material-icons">settings</span><span class="ml-2">Paramètres</span></a></li>
+        </ul>
         </ul>
       </nav>
     </aside>
@@ -89,7 +63,7 @@ try {
             <?php foreach ($offres as $offre): ?>
               <tr>
                 <td class="px-4 py-2"><?= htmlspecialchars($offre['id']) ?></td>
-                <td class="px-4 py-2"><?= htmlspecialchars($offre['titre']) ?></td>
+                <td class="px-4 py-2"><?= htmlspecialchars($offre['nom']) ?></td>
                 <td class="px-4 py-2"><?= htmlspecialchars($offre['description']) ?></td>
                 <td class="px-4 py-2"><?= htmlspecialchars($offre['prix']) ?> $</td>
                 <td class="px-4 py-2"><?= htmlspecialchars($offre['contenu']) ?></td>

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -19,7 +21,7 @@
       <nav>
         <ul>
           <li class="mb-4">
-            <a href="dashboard.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
+            <a href="dashboard (2).php" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
               <span class="material-icons">dashboard</span>
               <span class="ml-2">Tableau de bord</span>
             </a>
@@ -31,25 +33,25 @@
             </a>
           </li>
           <li class="mb-4">
-            <a href="entreprisee.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
+            <a href="entreprisee.php" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
               <span class="material-icons">business</span>
               <span class="ml-2">Entreprise</span>
             </a>
           </li>
           <li class="mb-4">
-            <a href="chauffeurs.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
+            <a href="chauffeurs.php" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
               <span class="material-icons">local_shipping</span>
               <span class="ml-2">Chauffeurs</span>
             </a>
           </li>
           <li class="mb-4">
-            <a href="messagerie.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
+            <a href="messagerie.php" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
               <span class="material-icons">chat</span>
               <span class="ml-2">Messagerie</span>
             </a>
           </li>
           <li class="mb-4">
-            <a href="commentaire.html" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
+            <a href="commentaire.php" class="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">
               <span class="material-icons">comment</span>
               <span class="ml-2">Commentaires</span>
             </a>
