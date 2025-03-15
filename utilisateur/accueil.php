@@ -665,26 +665,24 @@ footer {
 </head>
 <body>
     <!-- Barre de navigation -->
-<nav class="navbar">
+    <nav class="navbar">
     <div class="logo"><img src="" alt=""></div>
     <ul class="nav-links">
         <li><a href="accueil.php">Accueil</a></li>
         <li><a href="entreprise.php">Entreprise</a></li>
         <li><a href="a propos.php">À propos</a></li>
         <li><a href="#">Contact</a></li>
+        <li><a href="LOGIN1_R.php">Connexion</a></li>
     </ul>
+</nav>
 
-<body>
-
-<div class="profile-container" onclick="toggleMenu()">
-        
-        <img id="profile-img" src="default.png" class="profile-img" alt="Profil">
-        
-        <div id="dropdown-menu" class="dropdown-menu">
-            <a href="#">Paramètres</a>
-            <a href="logout.php">Se déconnecter</a>
-        </div>
+<div class="profile-container" onclick="toggleMenu()">     
+    <img id="profile-img" src="default.png" class="profile-img" alt="Profil">
+    <div id="dropdown-menu" class="dropdown-menu">
+        <a href="#">Paramètres</a>
+        <a href="logout.php" id="logout">Se déconnecter</a>
     </div>
+</div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {

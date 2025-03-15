@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             // Vérifier si l'utilisateur existe et si le mot de passe est correct
-            if ($user && password_verify($password, $user['password'])) {
+            if ($user && $password === $user['password']) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['nom'] = $user['nom'];
